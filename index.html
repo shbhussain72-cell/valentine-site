@@ -1,208 +1,232 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine Boarding Pass</title>
+<title>First Class Boarding</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
 }
 
-html, body {
-  height: 100%;
-  overflow: hidden;
+body{
+background:black;
+overflow:hidden;
+color:white;
 }
 
-/* Intro Screen */
-#intro {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg,#f8d7e3,#fce4ec);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 30px;
-  z-index: 10;
+/* Countdown Screen */
+#countdownScreen{
+position:fixed;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:120px;
+background:black;
+z-index:5;
 }
 
-#intro h1 {
-  font-size: 26px;
-  line-height: 1.5;
-  color: #222;
+/* Question Screen */
+#questionScreen{
+position:fixed;
+width:100%;
+height:100%;
+display:none;
+justify-content:center;
+align-items:center;
+text-align:center;
+background:#e7c9cf;
+color:#222;
+font-size:26px;
+padding:20px;
+z-index:4;
 }
 
-/* Main Container */
-#main {
-  display: none;
-  height: 100%;
-  width: 100%;
-  background: url("YOUR_GHIBLI_IMAGE_URL_HERE") center center/cover no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Main Section */
+#main{
+display:none;
+position:relative;
+width:100vw;
+height:100vh;
+overflow:hidden;
 }
 
-/* Dark overlay */
-#main::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  z-index: 0;
+/* Background Image */
+#bg{
+position:absolute;
+width:100%;
+height:100%;
+background:url("ghibli.jpg") center center/cover no-repeat;
+filter:brightness(0.6);
+}
+
+/* Boarding Wrapper */
+.wrapper{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:95vw;
+max-width:900px;
 }
 
 /* Boarding Pass */
-.boarding {
-  position: relative;
-  z-index: 1;
-  width: 90%;
-  max-width: 900px;
-  height: 300px;
-  display: flex;
-  border-radius: 20px;
-  overflow: hidden;
-  background: white;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+.pass{
+display:flex;
+background:white;
+color:black;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
 }
 
-/* Left Red Section */
-.left {
-  background: #b30000;
-  color: white;
-  width: 35%;
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+/* Left Section */
+.left{
+background:#c40000;
+color:white;
+width:30%;
+padding:30px;
+display:flex;
+flex-direction:column;
+justify-content:center;
 }
 
-.left h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
+.left h2{
+font-size:26px;
+margin-bottom:20px;
 }
 
-.left p {
-  margin: 6px 0;
+.left p{
+margin:8px 0;
 }
 
 /* Right Section */
-.right {
-  width: 65%;
-  padding: 25px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  row-gap: 10px;
-  align-content: center;
+.right{
+width:70%;
+padding:30px;
 }
 
-.right strong {
-  display: block;
+.row{
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
 }
 
-.button-container {
-  grid-column: span 2;
-  text-align: center;
-  margin-top: 15px;
+button{
+margin-top:20px;
+padding:12px 25px;
+border:none;
+border-radius:20px;
+background:#ffcc00;
+font-weight:bold;
+cursor:pointer;
 }
 
-button {
-  padding: 12px 30px;
-  border: none;
-  border-radius: 25px;
-  background: gold;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+button:hover{
+background:#ffdb4d;
 }
 
-button:hover {
-  transform: scale(1.05);
+/* Mobile still landscape layout */
+@media(max-width:768px){
+.pass{
+flex-direction:row;
 }
-
-/* Countdown */
-#countdown {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  color: white;
-  font-size: 16px;
-  z-index: 2;
+.left{
+width:35%;
+padding:20px;
+}
+.right{
+width:65%;
+padding:20px;
+}
 }
 </style>
 </head>
 
 <body>
 
-<div id="intro">
-  <h1>
-    I don't want to travel the world.<br><br>
-    I just want to travel it with you.<br><br>
-    Will you be my Valentine? ❤️
-  </h1>
+<!-- Countdown -->
+<div id="countdownScreen">5</div>
+
+<!-- Question -->
+<div id="questionScreen">
+<div>
+<p>I don't want to travel the world.</p>
+<p>I just want to travel it with you.</p>
+<br>
+<p><strong>Will you be my Valentine? ❤️</strong></p>
+</div>
 </div>
 
+<!-- Main Boarding -->
 <div id="main">
-  <div id="countdown"></div>
+<div id="bg"></div>
 
-  <div class="boarding">
-    <div class="left">
-      <h2>FIRST CLASS</h2>
-      <p>EMIRATES</p>
-      <p>Seat 1A</p>
-      <p>Terminal 3</p>
-      <p>Gate A14</p>
-    </div>
+<div class="wrapper">
+<div class="pass">
 
-    <div class="right">
-      <div><strong>Passenger:</strong> Zahra</div>
-      <div><strong>Flight:</strong> EK214</div>
-      <div><strong>From:</strong> Dohad</div>
-      <div><strong>To:</strong> Nathdwara</div>
-      <div><strong>Date:</strong> 14 February</div>
-      <div><strong>Time:</strong> 12:00 AM</div>
-      <div><strong>PNR:</strong> ZHR214X</div>
-      <div><strong>Lounge:</strong> First Class Lounge</div>
+<div class="left">
+<h2>FIRST CLASS</h2>
+<p>EMIRATES</p>
+<p>Seat 1A</p>
+<p>Terminal 3</p>
+<p>Gate A14</p>
+</div>
 
-      <div class="button-container">
-        <button onclick="alert('Best decision ever ❤️')">
-          Confirm Booking
-        </button>
-      </div>
-    </div>
-  </div>
+<div class="right">
+<div class="row">
+<div>
+<p><strong>Passenger:</strong> Zahra</p>
+<p><strong>From:</strong> Dohad</p>
+<p><strong>Date:</strong> 14 February</p>
+<p><strong>PNR:</strong> ZHR214X</p>
+</div>
+
+<div>
+<p><strong>Flight:</strong> EK214</p>
+<p><strong>To:</strong> Nathdwara</p>
+<p><strong>Time:</strong> 12:00 AM</p>
+<p><strong>Lounge:</strong> First Class Lounge</p>
+</div>
+</div>
+
+<button onclick="confirmBooking()">Confirm Booking</button>
+
+</div>
+</div>
+</div>
 </div>
 
 <script>
-/* Intro Delay */
-setTimeout(() => {
-  document.getElementById("intro").style.display = "none";
-  document.getElementById("main").style.display = "flex";
-}, 4000);
+let count = 5;
+const countdownEl = document.getElementById("countdownScreen");
 
-/* Countdown to 14 Feb 12:00 AM */
-const target = new Date("February 14, 2026 00:00:00").getTime();
-const countdown = document.getElementById("countdown");
+const interval = setInterval(() => {
+count--;
+countdownEl.innerText = count;
 
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = target - now;
+if(count === 0){
+clearInterval(interval);
+countdownEl.style.display = "none";
+document.getElementById("questionScreen").style.display = "flex";
 
-  if (diff > 0) {
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-    const mins = Math.floor((diff % (1000*60*60)) / (1000*60));
-    countdown.innerHTML = `Countdown: ${days}d ${hours}h ${mins}m`;
-  }
-}, 1000);
+setTimeout(()=>{
+document.getElementById("questionScreen").style.display = "none";
+document.getElementById("main").style.display = "block";
+},3000);
+}
+
+},1000);
+
+function confirmBooking(){
+alert("Best decision ever ❤️");
+}
 </script>
 
 </body>
