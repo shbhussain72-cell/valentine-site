@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentine First Class</title>
+<title>First Class Valentine</title>
 
 <style>
 body{
@@ -13,7 +13,7 @@ overflow:hidden;
 height:100vh;
 }
 
-/* All screens */
+/* Screens */
 .screen{
 position:absolute;
 top:0;
@@ -30,7 +30,7 @@ text-align:center;
 display:flex;
 }
 
-/* Full background layer */
+/* Background */
 .bg{
 position:absolute;
 top:0;
@@ -41,8 +41,7 @@ background:url('ghibli.jpg') center/cover no-repeat;
 z-index:0;
 }
 
-/* Soft dark overlay */
-.dark{
+.overlay{
 position:absolute;
 top:0;
 left:0;
@@ -52,14 +51,53 @@ background:rgba(0,0,0,0.35);
 z-index:1;
 }
 
-/* Pink intro */
-#intro{
-background:linear-gradient(135deg,#ff9ecf,#ffc3e6);
+/* Countdown */
+#countdownStart,
+#countdownConfirm{
+background:black;
+color:white;
+font-size:80px;
+font-weight:bold;
 }
 
-.content{
+/* Intro */
+#intro{
+background:linear-gradient(135deg,#ff9ecf,#ffc3e6);
+color:white;
+font-size:24px;
+padding:30px;
+}
+
+/* Emirates Landscape Ticket */
+.ticket{
 position:relative;
+margin-top:250px; /* pushes it down so face is visible */
+background:#b30000;
+color:white;
+width:90%;
+max-width:650px;
+padding:25px;
+border-radius:15px;
+box-shadow:0 15px 35px rgba(0,0,0,0.5);
 z-index:2;
+text-align:left;
+}
+
+.ticket h2{
+text-align:center;
+margin-bottom:10px;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+}
+
+.row div{
+width:45%;
+margin-bottom:10px;
+font-size:14px;
 }
 
 button{
@@ -74,46 +112,14 @@ color:white;
 font-weight:bold;
 }
 
-/* Red Emirates Ticket */
-.ticket{
-background:#b30000;
-color:white;
-width:90%;
-max-width:520px;
-padding:25px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.4);
-text-align:left;
-}
-
-.ticket h2{
-text-align:center;
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
-}
-
-.row div{
-width:48%;
-font-size:14px;
-margin-bottom:10px;
-}
-
+/* Final Proposal */
 .final-box{
+position:relative;
+z-index:2;
 background:rgba(0,0,0,0.6);
 color:white;
 padding:30px;
 border-radius:15px;
-}
-
-#countdownStart{
-background:black;
-color:white;
-font-size:80px;
-font-weight:bold;
 }
 
 </style>
@@ -121,26 +127,24 @@ font-weight:bold;
 
 <body>
 
-<!-- Countdown -->
+<!-- Initial Countdown -->
 <div class="screen active" id="countdownStart">
 <div id="startNumber">5</div>
 </div>
 
-<!-- Intro -->
+<!-- Intro Message -->
 <div class="screen" id="intro">
-<div class="content">
-<h2>I don't just want to travel the world...</h2>
-<h2>I want to travel it with you ❤️</h2>
-<button onclick="nextScreen('boarding')">Continue ✈️</button>
+<div>
+<p>I don't just want to travel the world...</p>
+<p>I want to travel it with you ❤️</p>
 </div>
 </div>
 
-<!-- Boarding -->
+<!-- Boarding Screen -->
 <div class="screen" id="boarding">
 <div class="bg"></div>
-<div class="dark"></div>
+<div class="overlay"></div>
 
-<div class="content">
 <div class="ticket">
 <h2>FIRST CLASS ✈️</h2>
 <p><strong>EMIRATES</strong></p>
@@ -160,46 +164,77 @@ font-weight:bold;
 <p><strong>Lounge:</strong> First Class Lounge</p>
 </div>
 </div>
+
 <div style="text-align:center;">
-<button onclick="nextScreen('final')">Confirm Booking 💌</button>
-</div>
+<button onclick="startConfirmCountdown()">Confirm Booking 💌</button>
 </div>
 </div>
 </div>
 
-<!-- Final -->
+<!-- Countdown After Confirm -->
+<div class="screen" id="countdownConfirm">
+<div id="confirmNumber">5</div>
+</div>
+
+<!-- Final Proposal -->
 <div class="screen" id="final">
 <div class="bg"></div>
-<div class="dark"></div>
+<div class="overlay"></div>
 
-<div class="content">
 <div class="final-box">
 <h2>Will You Be My Valentine? ❤️</h2>
-<button onclick="yesClicked()">Yes 💕</button>
-<button onclick="yesClicked()">Of Course 😌</button>
-</div>
+<button onclick="yesClicked()">Yes ❤️</button>
+<button onclick="yesClicked()">Of Course 🎀</button>
 </div>
 </div>
 
 <script>
 
+/* First Countdown */
 let startCount=5;
 let startEl=document.getElementById("startNumber");
 
-let interval=setInterval(()=>{
+let firstInterval=setInterval(()=>{
 startCount--;
 startEl.textContent=startCount;
+
 if(startCount===0){
-clearInterval(interval);
+clearInterval(firstInterval);
 nextScreen('intro');
+
+/* Wait 4 seconds then go to boarding */
+setTimeout(()=>{
+nextScreen('boarding');
+},4000);
+
 }
 },1000);
 
+/* Confirm Countdown */
+function startConfirmCountdown(){
+nextScreen('countdownConfirm');
+let confirmCount=5;
+let confirmEl=document.getElementById("confirmNumber");
+confirmEl.textContent=confirmCount;
+
+let secondInterval=setInterval(()=>{
+confirmCount--;
+confirmEl.textContent=confirmCount;
+
+if(confirmCount===0){
+clearInterval(secondInterval);
+nextScreen('final');
+}
+},1000);
+}
+
+/* Screen Switch */
 function nextScreen(id){
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
+/* Final Popup */
 function yesClicked(){
 alert("Best decision ever ❤️");
 }
