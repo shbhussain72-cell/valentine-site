@@ -3,193 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>First Class Boarding</title>
+<title>Final Boarding Call ❤️</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, sans-serif;
-}
-
 body{
-background:black;
-overflow:hidden;
-color:white;
-}
-
-/* Countdown Screen */
-#countdownScreen{
-position:fixed;
-width:100%;
-height:100%;
+margin:0;
+font-family: 'Segoe UI', sans-serif;
+background: linear-gradient(135deg,#ff9ecf,#ffc3e6);
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:120px;
-background:black;
-z-index:5;
-}
-
-/* Question Screen */
-#questionScreen{
-position:fixed;
-width:100%;
-height:100%;
-display:none;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:#e7c9cf;
-color:#222;
-font-size:26px;
-padding:20px;
-z-index:4;
-}
-
-/* Main Section */
-#main{
-display:none;
-position:relative;
-width:100vw;
 height:100vh;
 overflow:hidden;
 }
 
-/* Background Image */
-#bg{
-position:absolute;
+.screen{
+display:none;
+animation:fade 1s ease-in-out;
 width:100%;
-height:100%;
-background:url("ghibli.jpg") center center/cover no-repeat;
-filter:brightness(0.6);
+text-align:center;
 }
 
-/* Boarding Wrapper */
-.wrapper{
-position:absolute;
-top:65%;
-left:50%;
-transform:translate(-50%,-50%);
-width:95vw;
-max-width:900px;
-opacity:0;
-animation:fadeIn 1s forwards 0.5s;
+.active{
+display:block;
 }
 
-/* Boarding Pass */
+.container{
+background:rgba(255,255,255,0.9);
+padding:35px;
+border-radius:20px;
+width:90%;
+max-width:450px;
+margin:auto;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+}
+
+button{
+padding:12px 25px;
+margin:10px;
+border:none;
+border-radius:25px;
+font-size:16px;
+cursor:pointer;
+background:#ff4f9a;
+color:white;
+font-weight:bold;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
 .pass{
 display:flex;
-background:white;
-color:black;
-border-radius:25px;
-overflow:hidden;
-box-shadow:0 20px 40px rgba(0,0,0,0.4);
-}
-
-/* Left Section */
-.left{
-background:#c40000;
-color:white;
-width:30%;
-padding:30px;
-display:flex;
 flex-direction:column;
-justify-content:center;
+text-align:left;
 }
 
-.left h2{
-font-size:26px;
-margin-bottom:20px;
-}
-
-.left p{
-margin:8px 0;
-}
-
-/* Right Section */
-.right{
-width:70%;
-padding:30px;
+.pass h2{
+text-align:center;
+margin-bottom:15px;
 }
 
 .row{
 display:flex;
 justify-content:space-between;
-margin-bottom:15px;
+flex-wrap:wrap;
 }
 
-button{
-margin-top:20px;
-padding:14px 30px;
-border:none;
-border-radius:25px;
-background:#ffcc00;
-font-weight:700;
-font-size:18px;
-cursor:pointer;
-box-shadow:0 6px 15px rgba(0,0,0,0.3);
-transition:0.3s ease;
+.row div{
+width:48%;
+font-size:14px;
 }
 
-button:hover{
-transform:scale(1.05);
-background:#ffd633;
+#countdownNumber{
+font-size:60px;
+color:#ff2d75;
+font-weight:bold;
 }
 
-button:hover{
-background:#ffdb4d;
-}
-
-/* Mobile still landscape layout */
-@media(max-width:768px){
-.pass{
-flex-direction:row;
-}
-.left{
-width:35%;
-padding:20px;
-}
-.right{
-width:65%;
-padding:20px;
-}
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- Countdown -->
-<div id="countdownScreen">5</div>
-
-<!-- Question -->
-<div id="questionScreen">
-<div>
-<p>I don't want to travel the world.</p>
-<p>I just want to travel it with you.</p>
-<br>
-<p><strong>Will you be my Valentine? ❤️</strong></p>
+<!-- Intro -->
+<div class="screen active" id="intro">
+<div class="container">
+<h2>I don't just want to travel the world...</h2>
+<h2>I want to travel it with you ❤️</h2>
+<button onclick="nextScreen('boarding')">Continue ✈️</button>
 </div>
 </div>
 
-<!-- Main Boarding -->
-<div id="main">
-<div id="bg"></div>
+<!-- Boarding Pass -->
+<div class="screen" id="boarding">
+<div class="container pass">
 
-<div class="wrapper">
-<div class="pass">
+<h2>FIRST CLASS ✈️</h2>
+<p style="text-align:center;"><strong>EMIRATES</strong></p>
 
-<div class="left">
-<h2>FIRST CLASS</h2>
-<p>EMIRATES</p>
-<p>Seat 1A</p>
-<p>Terminal 3</p>
-<p>Gate A14</p>
-</div>
-
-<div class="right">
 <div class="row">
 <div>
 <p><strong>Passenger:</strong> Zahra</p>
@@ -202,46 +120,58 @@ padding:20px;
 <p><strong>Flight:</strong> EK214</p>
 <p><strong>To:</strong> Nathdwara</p>
 <p><strong>Time:</strong> 12:00 AM</p>
-<p><strong>Lounge:</strong> First Class Lounge</p>
+<p><strong>Lounge:</strong> First Class</p>
 </div>
 </div>
 
-<button onclick="confirmBooking()">Confirm Booking</button>
+<button onclick="startCountdown()">Confirm Booking 💌</button>
 
 </div>
 </div>
+
+<!-- Countdown -->
+<div class="screen" id="countdown">
+<div class="container">
+<h2>Preparing Your Journey 💖</h2>
+<div id="countdownNumber">5</div>
+</div>
+</div>
+
+<!-- Final Question -->
+<div class="screen" id="final">
+<div class="container">
+<h2>Will You Be My Valentine? ❤️</h2>
+<button onclick="yesClicked()">Yes 💕</button>
+<button onclick="yesClicked()">Of Course 😌</button>
 </div>
 </div>
 
 <script>
-let count = 5;
-const countdownEl = document.getElementById("countdownScreen");
-
-const interval = setInterval(() => {
-count--;
-countdownEl.innerText = count;
-
-if(count === 0){
-clearInterval(interval);
-countdownEl.style.display = "none";
-document.getElementById("questionScreen").style.display = "flex";
-
-setTimeout(()=>{
-document.getElementById("questionScreen").style.display = "none";
-document.getElementById("main").style.display = "block";
-},3000);
+function nextScreen(id){
+document.querySelectorAll('.screen').forEach(screen=>{
+screen.classList.remove('active');
+});
+document.getElementById(id).classList.add('active');
 }
 
-},1000);
+function startCountdown(){
+nextScreen('countdown');
+let count=5;
+let interval=setInterval(()=>{
+count--;
+document.getElementById('countdownNumber').textContent=count;
 
-function confirmBooking(){
+if(count===0){
+clearInterval(interval);
+nextScreen('final');
+}
+},1000);
+}
+
+function yesClicked(){
 alert("Best decision ever ❤️");
 }
 </script>
 
 </body>
 </html>
-
-@keyframes fadeIn{
-to{opacity:1;}
-}
