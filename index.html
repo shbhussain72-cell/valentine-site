@@ -30,7 +30,7 @@ text-align:center;
 display:flex;
 }
 
-/* Background Image */
+/* Background */
 .bg{
 position:absolute;
 top:0;
@@ -54,9 +54,9 @@ z-index:1;
 /* Countdown */
 #countdownStart,
 #countdownConfirm{
-background:linear-gradient(135deg,#ff9ecf,#ffc3e6);
+background:black;
 color:white;
-font-size:70px;
+font-size:80px;
 font-weight:bold;
 }
 
@@ -64,57 +64,73 @@ font-weight:bold;
 #intro{
 background:linear-gradient(135deg,#ff9ecf,#ffc3e6);
 color:white;
-font-size:22px;
+font-size:24px;
 padding:30px;
 }
 
-/* Ticket */
+/* REAL LANDSCAPE TICKET */
 .ticket{
 position:relative;
-margin-top:150px;
-background:#b30000;
-color:white;
+margin-top:180px;
 width:92%;
 max-width:720px;
-padding:18px 22px;
+background:white;
 border-radius:18px;
-box-shadow:0 12px 30px rgba(0,0,0,0.45);
-z-index:2;
 display:flex;
-gap:18px;
+overflow:hidden;
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+z-index:2;
 }
+
+/* Left Red Strip */
 .ticket-left{
-width:30%;
-border-right:2px dashed rgba(255,255,255,0.5);
-padding-right:12px;
+width:28%;
+background:#b30000;
+color:white;
+padding:20px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+text-align:left;
 }
+
+/* Right White Section */
 .ticket-right{
-width:70%;
+width:72%;
+padding:20px;
+color:#111;
+text-align:left;
 }
-.ticket-right .row{
+
+.ticket-right h2{
+margin:0 0 10px 0;
+font-size:20px;
+color:#b30000;
+}
+
+.ticket-details{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:6px 14px;
+gap:8px 18px;
 font-size:13px;
 }
-.ticket h2{
-margin:0 0 10px 0;
-font-size:18px;
+
+.ticket-details strong{
+color:#b30000;
 }
 
 button{
 padding:12px 25px;
-margin-top:15px;
 border:none;
 border-radius:25px;
-font-size:16px;
+font-size:15px;
 cursor:pointer;
 background:#ff4f9a;
 color:white;
 font-weight:bold;
 }
 
-/* Final */
+/* Final Proposal */
 .final-box{
 position:relative;
 z-index:2;
@@ -122,39 +138,13 @@ background:rgba(0,0,0,0.6);
 color:white;
 padding:30px;
 border-radius:15px;
-width:90%;
-max-width:400px;
-}
-
-/* Mobile Fix */
-@media (max-width:480px){
-
-.ticket{
-margin-top:180px;
-padding:18px;
-}
-
-.row div{
-width:100%;
-font-size:13px;
-}
-
-button{
-width:100%;
-}
-
-#countdownStart,
-#countdownConfirm{
-font-size:55px;
-}
-
 }
 </style>
 </head>
 
 <body>
 
-<!-- First Countdown -->
+<!-- Initial Countdown -->
 <div class="screen active" id="countdownStart">
 <div id="startNumber">5</div>
 </div>
@@ -173,15 +163,24 @@ font-size:55px;
 <div class="overlay"></div>
 
 <div class="ticket">
+
 <div class="ticket-left">
-<h2>FIRST CLASS ✈️</h2>
-<p><strong>EMIRATES</strong></p>
+<div>
+<h3>FIRST CLASS ✈️</h3>
+<p>EMIRATES</p>
+</div>
+
+<div>
 <p>Seat 1A</p>
 <p>Terminal 3</p>
 <p>Gate A14</p>
 </div>
+</div>
+
 <div class="ticket-right">
-<div class="row">
+<h2>BOARDING PASS</h2>
+
+<div class="ticket-details">
 <div><strong>Passenger:</strong> Zahra</div>
 <div><strong>Flight:</strong> EK214</div>
 <div><strong>From:</strong> Dohad</div>
@@ -191,8 +190,11 @@ font-size:55px;
 <div><strong>PNR:</strong> ZHR214X</div>
 <div><strong>Lounge:</strong> First Class</div>
 </div>
-<div style="text-align:center;margin-top:12px;">
+
+<div style="text-align:center;margin-top:15px;">
 <button onclick="startConfirmCountdown()">Confirm Booking 💌</button>
+</div>
+
 </div>
 </div>
 </div>
