@@ -30,7 +30,7 @@ text-align:center;
 display:flex;
 }
 
-/* Background */
+/* Background Image */
 .bg{
 position:absolute;
 top:0;
@@ -54,9 +54,9 @@ z-index:1;
 /* Countdown */
 #countdownStart,
 #countdownConfirm{
-background:black;
+background:linear-gradient(135deg,#ff9ecf,#ffc3e6);
 color:white;
-font-size:80px;
+font-size:70px;
 font-weight:bold;
 }
 
@@ -64,20 +64,20 @@ font-weight:bold;
 #intro{
 background:linear-gradient(135deg,#ff9ecf,#ffc3e6);
 color:white;
-font-size:24px;
+font-size:22px;
 padding:30px;
 }
 
-/* Emirates Landscape Ticket */
+/* Ticket */
 .ticket{
 position:relative;
-margin-top:250px; /* pushes it down so face is visible */
+margin-top:220px;
 background:#b30000;
 color:white;
 width:90%;
 max-width:650px;
 padding:25px;
-border-radius:15px;
+border-radius:18px;
 box-shadow:0 15px 35px rgba(0,0,0,0.5);
 z-index:2;
 text-align:left;
@@ -95,7 +95,7 @@ flex-wrap:wrap;
 }
 
 .row div{
-width:45%;
+width:48%;
 margin-bottom:10px;
 font-size:14px;
 }
@@ -112,7 +112,7 @@ color:white;
 font-weight:bold;
 }
 
-/* Final Proposal */
+/* Final */
 .final-box{
 position:relative;
 z-index:2;
@@ -120,19 +120,44 @@ background:rgba(0,0,0,0.6);
 color:white;
 padding:30px;
 border-radius:15px;
+width:90%;
+max-width:400px;
 }
 
+/* Mobile Fix */
+@media (max-width:480px){
+
+.ticket{
+margin-top:180px;
+padding:18px;
+}
+
+.row div{
+width:100%;
+font-size:13px;
+}
+
+button{
+width:100%;
+}
+
+#countdownStart,
+#countdownConfirm{
+font-size:55px;
+}
+
+}
 </style>
 </head>
 
 <body>
 
-<!-- Initial Countdown -->
+<!-- First Countdown -->
 <div class="screen active" id="countdownStart">
 <div id="startNumber">5</div>
 </div>
 
-<!-- Intro Message -->
+<!-- Intro -->
 <div class="screen" id="intro">
 <div>
 <p>I don't just want to travel the world...</p>
@@ -140,7 +165,7 @@ border-radius:15px;
 </div>
 </div>
 
-<!-- Boarding Screen -->
+<!-- Boarding -->
 <div class="screen" id="boarding">
 <div class="bg"></div>
 <div class="overlay"></div>
@@ -171,7 +196,7 @@ border-radius:15px;
 </div>
 </div>
 
-<!-- Countdown After Confirm -->
+<!-- Confirm Countdown -->
 <div class="screen" id="countdownConfirm">
 <div id="confirmNumber">5</div>
 </div>
@@ -202,11 +227,9 @@ if(startCount===0){
 clearInterval(firstInterval);
 nextScreen('intro');
 
-/* Wait 4 seconds then go to boarding */
 setTimeout(()=>{
 nextScreen('boarding');
 },4000);
-
 }
 },1000);
 
