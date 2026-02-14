@@ -51,12 +51,12 @@ background:rgba(0,0,0,0.35);
 z-index:1;
 }
 
-/* Countdown */
+/* COUNTDOWN BACK TO PINK */
 #countdownStart,
 #countdownConfirm{
-background:black;
+background:linear-gradient(135deg,#ff9ecf,#ffc3e6);
 color:white;
-font-size:80px;
+font-size:90px;
 font-weight:bold;
 }
 
@@ -68,69 +68,88 @@ font-size:24px;
 padding:30px;
 }
 
-/* REAL LANDSCAPE TICKET */
+/* REAL LANDSCAPE BOARDING PASS */
 .ticket{
 position:relative;
 margin-top:180px;
-width:92%;
-max-width:720px;
+width:95%;
+max-width:820px;
+height:220px;
 background:white;
-border-radius:18px;
 display:flex;
+border-radius:12px;
 overflow:hidden;
-box-shadow:0 20px 40px rgba(0,0,0,0.4);
+box-shadow:0 25px 50px rgba(0,0,0,0.5);
 z-index:2;
 }
 
-/* Left Red Strip */
-.ticket-left{
+/* Tear Stub */
+.stub{
 width:28%;
 background:#b30000;
 color:white;
-padding:20px;
+padding:18px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
-text-align:left;
+border-right:3px dashed rgba(255,255,255,0.6);
 }
 
-/* Right White Section */
-.ticket-right{
-width:72%;
-padding:20px;
-color:#111;
-text-align:left;
-}
-
-.ticket-right h2{
-margin:0 0 10px 0;
+.stub h3{
+margin:0;
 font-size:20px;
-color:#b30000;
 }
 
-.ticket-details{
+.stub p{
+margin:4px 0;
+font-size:14px;
+}
+
+/* Main Ticket */
+.main{
+width:72%;
+padding:18px;
+color:#111;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+}
+
+.main-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.main-top h2{
+margin:0;
+color:#b30000;
+font-size:22px;
+}
+
+.details{
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:8px 18px;
+gap:6px 25px;
 font-size:13px;
+margin-top:10px;
 }
 
-.ticket-details strong{
+.details strong{
 color:#b30000;
 }
 
 button{
-padding:12px 25px;
+padding:10px 22px;
 border:none;
-border-radius:25px;
-font-size:15px;
-cursor:pointer;
+border-radius:20px;
 background:#ff4f9a;
 color:white;
 font-weight:bold;
+cursor:pointer;
 }
 
-/* Final Proposal */
+/* Final */
 .final-box{
 position:relative;
 z-index:2;
@@ -144,7 +163,7 @@ border-radius:15px;
 
 <body>
 
-<!-- Initial Countdown -->
+<!-- First Countdown -->
 <div class="screen active" id="countdownStart">
 <div id="startNumber">5</div>
 </div>
@@ -164,12 +183,11 @@ border-radius:15px;
 
 <div class="ticket">
 
-<div class="ticket-left">
+<div class="stub">
 <div>
 <h3>FIRST CLASS ✈️</h3>
 <p>EMIRATES</p>
 </div>
-
 <div>
 <p>Seat 1A</p>
 <p>Terminal 3</p>
@@ -177,10 +195,13 @@ border-radius:15px;
 </div>
 </div>
 
-<div class="ticket-right">
-<h2>BOARDING PASS</h2>
+<div class="main">
 
-<div class="ticket-details">
+<div class="main-top">
+<h2>BOARDING PASS</h2>
+</div>
+
+<div class="details">
 <div><strong>Passenger:</strong> Zahra</div>
 <div><strong>Flight:</strong> EK214</div>
 <div><strong>From:</strong> Dohad</div>
@@ -191,7 +212,7 @@ border-radius:15px;
 <div><strong>Lounge:</strong> First Class</div>
 </div>
 
-<div style="text-align:center;margin-top:15px;">
+<div style="text-align:center;margin-top:10px;">
 <button onclick="startConfirmCountdown()">Confirm Booking 💌</button>
 </div>
 
@@ -204,7 +225,7 @@ border-radius:15px;
 <div id="confirmNumber">5</div>
 </div>
 
-<!-- Final Proposal -->
+<!-- Final -->
 <div class="screen" id="final">
 <div class="bg"></div>
 <div class="overlay"></div>
@@ -217,8 +238,6 @@ border-radius:15px;
 </div>
 
 <script>
-
-/* First Countdown */
 let startCount=5;
 let startEl=document.getElementById("startNumber");
 
@@ -229,14 +248,10 @@ startEl.textContent=startCount;
 if(startCount===0){
 clearInterval(firstInterval);
 nextScreen('intro');
-
-setTimeout(()=>{
-nextScreen('boarding');
-},4000);
+setTimeout(()=>{ nextScreen('boarding'); },4000);
 }
 },1000);
 
-/* Confirm Countdown */
 function startConfirmCountdown(){
 nextScreen('countdownConfirm');
 let confirmCount=5;
@@ -254,17 +269,14 @@ nextScreen('final');
 },1000);
 }
 
-/* Screen Switch */
 function nextScreen(id){
 document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 }
 
-/* Final Popup */
 function yesClicked(){
 alert("Best decision ever ❤️");
 }
-
 </script>
 
 </body>
