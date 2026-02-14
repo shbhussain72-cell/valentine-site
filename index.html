@@ -71,33 +71,35 @@ padding:30px;
 /* Ticket */
 .ticket{
 position:relative;
-margin-top:220px;
+margin-top:150px;
 background:#b30000;
 color:white;
-width:90%;
-max-width:650px;
-padding:25px;
+width:92%;
+max-width:720px;
+padding:18px 22px;
 border-radius:18px;
-box-shadow:0 15px 35px rgba(0,0,0,0.5);
+box-shadow:0 12px 30px rgba(0,0,0,0.45);
 z-index:2;
-text-align:left;
-}
-
-.ticket h2{
-text-align:center;
-margin-bottom:10px;
-}
-
-.row{
 display:flex;
-justify-content:space-between;
-flex-wrap:wrap;
+gap:18px;
 }
-
-.row div{
-width:48%;
-margin-bottom:10px;
-font-size:14px;
+.ticket-left{
+width:30%;
+border-right:2px dashed rgba(255,255,255,0.5);
+padding-right:12px;
+}
+.ticket-right{
+width:70%;
+}
+.ticket-right .row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:6px 14px;
+font-size:13px;
+}
+.ticket h2{
+margin:0 0 10px 0;
+font-size:18px;
 }
 
 button{
@@ -171,26 +173,25 @@ font-size:55px;
 <div class="overlay"></div>
 
 <div class="ticket">
+<div class="ticket-left">
 <h2>FIRST CLASS ✈️</h2>
 <p><strong>EMIRATES</strong></p>
-<p>Seat 1A | Terminal 3 | Gate A14</p>
-<hr style="border:1px dashed white;">
+<p>Seat 1A</p>
+<p>Terminal 3</p>
+<p>Gate A14</p>
+</div>
+<div class="ticket-right">
 <div class="row">
-<div>
-<p><strong>Passenger:</strong> Zahra</p>
-<p><strong>From:</strong> Dohad</p>
-<p><strong>Date:</strong> 14 February</p>
-<p><strong>PNR:</strong> ZHR214X</p>
+<div><strong>Passenger:</strong> Zahra</div>
+<div><strong>Flight:</strong> EK214</div>
+<div><strong>From:</strong> Dohad</div>
+<div><strong>To:</strong> Nathdwara</div>
+<div><strong>Date:</strong> 14 February</div>
+<div><strong>Time:</strong> 12:00 AM</div>
+<div><strong>PNR:</strong> ZHR214X</div>
+<div><strong>Lounge:</strong> First Class</div>
 </div>
-<div>
-<p><strong>Flight:</strong> EK214</p>
-<p><strong>To:</strong> Nathdwara</p>
-<p><strong>Time:</strong> 12:00 AM</p>
-<p><strong>Lounge:</strong> First Class Lounge</p>
-</div>
-</div>
-
-<div style="text-align:center;">
+<div style="text-align:center;margin-top:12px;">
 <button onclick="startConfirmCountdown()">Confirm Booking 💌</button>
 </div>
 </div>
